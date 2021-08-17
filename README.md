@@ -28,3 +28,7 @@
 If there is a record that has received an error, you can run the `php artisan check:webhook-errors` command after correcting the error and reprocess the records.
 
 You can use the `php artisan check:webhook-errors --ids=1 --ids=2...` command to reprocess specific records instead of all records in the table.
+
+## TO DO List
+
+- [ ] Error notifications
