@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\CreateWebhookProcess;
 use App\Jobs\WebhookProcess;
 use App\Product;
 use App\Services\BigcommerceApiService as BigcommerceClient;
@@ -24,14 +25,14 @@ class WebhookController extends Controller
         $scope     = $request->get('scope');
 
         if (config('webhook.active')) {
-            try {
+            if (config('webhook.create_with_job')) {
+                dispatch(new CreateWebhookProcess($scope, $type, $productID));
+            } else {
                 $process                 = new \App\WebhookProcess();
                 $process->type           = $type;
                 $process->scope          = $scope;
                 $process->bigcommerce_id = $productID;
                 $process->save();
-            } catch (\Exception $exception) {
-
             }
         } else {
             dispatch(new WebhookProcess($scope, $type, $productID));

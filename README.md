@@ -18,7 +18,8 @@
 
 ## Setup
 
-- Add `WEBHOOK_BULK_ACTIVE=true` code to your .env file
+- Add `WEBHOOK_BULK_ACTIVE=true` code to your .env file.
+- If you have too much data you can add `WEBHOOK_CREATE_WITH_JOB=true` code to your .env file.
 - All files/codes copy the related places.
 - Run `php artisan migrate` command.
 - Add `$schedule->command('check:webhooks')->everyFiveMinutes();` command with `CheckWebhookProcess` Class implementation to `App\Console\Kernel.php` file.
