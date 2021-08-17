@@ -38,9 +38,11 @@ class CheckWebhookProcess extends Command
      */
     public function handle()
     {
+        $minutes = (int)config("webhook.check_process_per_minute");
+
         $processes = WebhookProcess::where('error', 0)
             ->orderBy('created_at')
-            ->limit((60 / 3) * 5 - 1)
+            ->limit((60 / 3) * $minutes - 1)
             ->get();
 
         foreach ($processes as $key => $process) {
