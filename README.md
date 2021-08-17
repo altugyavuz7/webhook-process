@@ -24,7 +24,7 @@ WEBHOOK_CREATE_WITH_JOB=true
 WEBHOOK_CHECK_PER_MINUTE=5
 ```
 
-- Add `WEBHOOK_BULK_ACTIVE=true` code to your .env file.
+- Add `WEBHOOK_BULK_ACTIVE=true` code to your .env file and set `true` for activate this system.
 - If you have too much data you can add `WEBHOOK_CREATE_WITH_JOB=true` code to your .env file.
 - `WEBHOOK_CHECK_PER_MINUTE` The process specifying how many minutes intervals the transactions will be checked. After changing this time, you need to manually change the schedule time via `App\Console\Kernel.php`.
 - All files/codes copy the related places.
