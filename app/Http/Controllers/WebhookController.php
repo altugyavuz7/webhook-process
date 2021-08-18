@@ -28,11 +28,12 @@ class WebhookController extends Controller
             if (config('webhook.create_with_job')) {
                 dispatch(new CreateWebhookProcess($scope, $type, $productID));
             } else {
-                $process                 = new \App\WebhookProcess();
-                $process->type           = $type;
-                $process->scope          = $scope;
-                $process->bigcommerce_id = $productID;
-                $process->save();
+                \App\WebhookProcess::updateOrCreate([
+                    'bigcommerce_id' => $productID,
+                    'scope'          => $scope
+                ], [
+                    'type' => $type
+                ]);
             }
         } else {
             dispatch(new WebhookProcess($scope, $type, $productID));

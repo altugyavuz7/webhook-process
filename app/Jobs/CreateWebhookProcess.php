@@ -37,10 +37,11 @@ class CreateWebhookProcess implements ShouldQueue
      */
     public function handle()
     {
-        $process                 = new \App\WebhookProcess();
-        $process->type           = $this->type;
-        $process->scope          = $this->scope;
-        $process->bigcommerce_id = $this->id;
-        $process->save();
+        \App\WebhookProcess::updateOrCreate([
+            'bigcommerce_id' => $this->id,
+            'scope'          => $this->scope
+        ], [
+            'type' => $this->type
+        ]);
     }
 }
