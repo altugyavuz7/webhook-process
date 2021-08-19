@@ -5,6 +5,8 @@
   - CheckWebhookProcessError
 - Controllers
   - WebhookController (only listen function changed)
+  - WebhookProcessController (for UI)
+  - WebhookProcessErrorController (for UI)
 - Jobs
   - WebhookProcess (updated)
 - Models
@@ -15,6 +17,12 @@
 - Database Migration
   - Webhook process table
   - Webhook process error table
+- Resources (for UI)
+  - Menu
+  - Webhook process list
+  - Webhook process error list
+- Routes (for UI)
+  - Web
 
 ## Setup
 
@@ -37,6 +45,13 @@ If there is a record that has received an error, you can run the `php artisan ch
 
 You can use the `php artisan check:webhook-errors --ids=1 --ids=2...` command to reprocess specific records instead of all records in the table.
 
+## UI Implementation (Optional)
+- WebhookProcessController.php
+- WebhookProcessErrorController.php
+- All files under resources folder
+- Routes/web.php
+
 ## TO DO List
 
+- [x] UI Implementation
 - [ ] Error notifications
