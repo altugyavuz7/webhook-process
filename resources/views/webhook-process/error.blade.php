@@ -3,7 +3,7 @@
 @section('content')
   <div class="card">
     <div class="card-header">
-      <i class="fas fa-signal"></i> Waiting Webhook Processes
+      <i class="fas fa-list-alt"></i> Webhook Process Errors
     </div>
 
     <div class="card-body">
