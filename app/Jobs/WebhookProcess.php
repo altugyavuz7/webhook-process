@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Notifications\WebhookErrorNotification;
 use App\Product;
 use App\SyncData;
 use App\WebhookProcessError;
@@ -16,6 +17,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Log;
 use App\WebhookProcess as WebhookProcessModel;
+use Illuminate\Support\Facades\Notification;
 
 class WebhookProcess implements ShouldQueue
 {
@@ -198,5 +200,14 @@ class WebhookProcess implements ShouldQueue
         $errorRecord->message    = $exception->getMessage();
         $errorRecord->code       = $exception->getCode();
         $errorRecord->save();
+
+        if (config('webhook.slack_notification')) {
+            $slackUrl = config('webhook.slack_hook_url');
+            if ($slackUrl) {
+                Notification::route('slack', $slackUrl)
+                    ->notify(new WebhookErrorNotification($exception, $this->process));
+            }
+
+        }
     }
 }
