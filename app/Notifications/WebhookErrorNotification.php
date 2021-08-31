@@ -48,6 +48,7 @@ class WebhookErrorNotification extends Notification
     public function toSlack($notifiable)
     {
         $url = route('webhook-process-errors.index');
+        
         $content = config('app.name') . " Webhook Process Error";
 
         if (config('webhook.slack_mention_activate') && config('webhook.slack_mention_user') != "") {
